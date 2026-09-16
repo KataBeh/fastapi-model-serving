@@ -13,10 +13,12 @@ def home():
     return {"message": "Model API is running"}
 
 class PredictionInput(BaseModel):
-    monthly_spend: float
-    months_as_customer: int
-    support_cases: int
-    usage_frequency: int
+    monthly_spend: float = Field(ge=0, le=5000)     # GE = greater than or equal to, LE = less than or equal to; alltså här måste vara ett decimaltal mellan 0 och 5000
+    months_as_customer: int = Field(ge=0, le=120)   
+    support_cases: int = Field(ge=0, le=50)         # här tex support cases måste vara ett heltal mellan 0 och 50
+    usage_frequency: int = Field(ge=0, le=100)
+
+
 
 # lägger in POST endpointen, nu när GET är klar:
 @app.post("/predict")                               # när någon skickar en POST-request till /predict så ska funktionen nedan köras
