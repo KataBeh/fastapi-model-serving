@@ -39,3 +39,12 @@ def predict(data: PredictionInput):                 # predict funktion där Fast
         "prediction": prediction_label,
         "probability": float(probability)
     }                                               # en vanlig python dictionary som FASTAPI gör automatiskt om till JSON
+
+
+# lägger till en GET/health endpoint:
+@app.get("/health")                                 # API:t lever och modellen är redo att användas
+def health():
+    return {
+        "status": "ok",
+        "model_loaded": True 
+    }
